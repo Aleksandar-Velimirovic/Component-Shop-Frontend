@@ -28,6 +28,11 @@
           <small v-if="errors.password" style="color:red;">{{errors.password[0]}}</small>
         </div>
         <div class="form-group">
+          <label>Confirm Password</label>
+          <input class="form-control" type="password" v-model="user.repeat_password" @click="removeErrorConfirmPassword()">
+          <small v-if="errors.repeat_password" style="color:red;">{{errors.repeat_password[0]}}</small>
+        </div>
+        <div class="form-group">
           <button @click="register()" class="btn btn-primary">Submit</button>
         </div>
       </div>
@@ -85,6 +90,12 @@ import { authService } from "../services/AuthService"
       removeErrorPassword(){
         if(this.errors.password){
             this.errors.password = null
+        }
+      },
+
+      removeErrorConfirmPassword(){
+        if(this.errors.repeat_password){
+            this.errors.repeat_password = null
         }
       }
     }
