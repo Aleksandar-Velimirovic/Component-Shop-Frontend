@@ -3,20 +3,24 @@
     <div>
       <Carousel/>
     </div>
-    <aside style="float:left;width:25%;">aaa</aside>
-    <Marketing style="float:right;width:70%;"/>
+    <div class="container" >
+      <!-- <Marketing/> -->
+      <Album/>
+    </div>
   </div>
 </template>
 
 <script>
 
 import Carousel from "../components/Carousel"
-import Marketing from "../components/Marketing"
+// import Marketing from "../components/Marketing"
+import Album from "../components/Album"
 
 export default {
   components:{
     Carousel,
-    Marketing
+    // Marketing,
+    Album
   }
 }
 </script>

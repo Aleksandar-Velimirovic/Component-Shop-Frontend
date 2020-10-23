@@ -8,4 +8,15 @@ export class HttpService{
         axios.defaults.headers.accept = 'application/json'
         this.axios = axios
     }
+
+    setHeaders(headers) {
+        Object.assign(axios.defaults.headers.common, headers)
+    }
+
+    parseUrl(url){
+        if(typeof url === 'string' && url.includes(BASE_URL)){
+            return url.substr(BASE_URL.length)
+        }
+        return url
+    }
 }
