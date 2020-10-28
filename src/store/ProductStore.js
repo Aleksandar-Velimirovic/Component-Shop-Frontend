@@ -3,9 +3,9 @@ import { productsService } from "../services/ProductService";
 export const ProductStore = {
     state:{
         products: [],
+        searchedProducts: [],
         filters: [],
-        category_id:null,
-        next_page_url: 'products'
+        category_id:null
     },
 
     mutations:{
@@ -31,24 +31,12 @@ export const ProductStore = {
             })
         },
 
-        extendsProducts(state, products){
-            state.products.push(... products)
-          },
-      
-        setNextPageUrl(state, url){
-            state.next_page_url = productsService.parseUrl(url)
+        setSearchedProducts(state, products){
+            state.searchedProducts = products
         },
     },
 
     actions:{
-
-        async getProductsByUrl(context){
-
-            const response = await productsService.getGradebooksByUrl()
-      
-            context.commit('extendsProducts', response.data.data)
-            context.commit('setNextPageUrl', response.data.next_page_url)
-        },
 
         async getProductsByCategory(context, params){
             let response = await productsService.getProductsByCategory(params.categoryId, params.filters)
@@ -64,13 +52,17 @@ export const ProductStore = {
 
         async searchProductsOfAnyCategory(context, searchTerm){
             let response = await productsService.searchProductsOfAnyCategory(searchTerm)
-            context.commit('setProducts', response.data)
+            context.commit('setSearchedProducts', response.data)
         }
     },
 
     getters:{
         getFilters(state){
             return state.filters
+        },
+
+        getSearchedProducts(state){
+            return state.searchedProducts
         },
 
         getProducts(state){

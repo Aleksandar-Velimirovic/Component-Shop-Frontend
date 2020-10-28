@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#"><b style="font-family:Roboto">Online Component Shop</b></a>
+          <a class="navbar-brand" href="/"><b style="font-family:Roboto">Online Component Shop</b></a>
           <div class="mb-3" v-if="$mq === 'md' || $mq === 'sm'">
             <b-button class="navbar-toggler" v-b-toggle href="#sidebar-no-header" @click.prevent><span class="navbar-toggler-icon"></span></b-button>
           </div>
@@ -20,16 +20,20 @@
                   <b-button class="nav-link" v-b-modal.modal-register v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Register</b></b-button>
                 </a>
              </li>
+             <b-button v-b-toggle.sidebar-categories style="border-radius:0px;box-shadow:none;font-family:Roboto;background-color:#ff9999;color:#000000;border:none;font-weight:bold;">Components <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15211315791553239378-512.png" style="height:30px;width:30px;" alt=""></b-button>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <div class="form-inline my-2 my-lg-0">
+              <small v-if="searchErrorMessage" style="color:red;margin-right:3px;">{{searchErrorMessage}}</small>
+              <input class="form-control mr-sm-2" type="search" @click="removeSearchErrorMessage()" v-model="searchTerm" placeholder="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search()">Search</button>
+            </div>
           </div>
+          <!-- #f8f9fa -->
         </nav>
           <Aside id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow/>
           <Login/>
           <Register/>
+          <ProductCategoriesSidebar/>
     <!-- {{$mq}} -->
     </div>
 </template>
@@ -39,12 +43,38 @@
 import Aside from "./Aside"
 import Login from "./Login"
 import Register from "./Register"
+import ProductCategoriesSidebar from "./ProductCategoriesSidebar"
 
 export default {
+
+  data(){
+    return{
+      searchTerm: '',
+      searchErrorMessage: null
+    }
+  },
+
+  methods:{
+    search(){
+      if(this.searchTerm !== ''){
+        this.$router.push({path: `/search/${this.searchTerm}`})
+      }else{
+        return this.searchErrorMessage = 'Please enter a search term to search products!'
+      }
+    },
+
+    removeSearchErrorMessage(){
+      if(this.searchErrorMessage){
+        this.searchErrorMessage = null
+      }
+    }
+  },
+
   components:{
     Aside,
     Login,
-    Register
+    Register,
+    ProductCategoriesSidebar
   }
 }
 </script>

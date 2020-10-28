@@ -4,7 +4,8 @@ export const AuthStore = {
 
     state:{
         token: localStorage.getItem('token'),
-        errors: []
+        errors: [],
+        mailVerificationMessage: ''
     },
 
     mutations:{
@@ -15,6 +16,10 @@ export const AuthStore = {
 
         setToken(state, token){
             state.token = token
+        },
+
+        setmailVerificationMessage(state, message){
+            state.mailVerificationMessage = message
         }
     },
 
@@ -49,6 +54,10 @@ export const AuthStore = {
 
         isUserLoggedIn(state){
             return !!state.token
+        },
+
+        getmailVerificationMessage(state){
+            return state.mailVerificationMessage
         }
     }
 }

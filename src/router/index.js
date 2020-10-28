@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Marketing from '../components/Marketing.vue'
 import Carousel from '../components/Carousel.vue'
+import Verification from '../views/Verification.vue'
+import SearchedComponents from '../views/SearchedComponents.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,17 @@ const routes = [
     name: 'Carousel',
     component: Carousel
   },
+
+  {
+    path: '/verification/:token',
+    name: 'Verification',
+    component: Verification
+  },
+  {
+    path: '/search/:searchTerm?',
+    name: 'SearchedComponents',
+    component: SearchedComponents
+  }
 ]
 
 const router = new VueRouter({

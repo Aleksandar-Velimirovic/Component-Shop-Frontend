@@ -4,7 +4,6 @@
       <Carousel/>
     </div>
     <div class="container" >
-      <!-- <Marketing/> -->
       <Album/>
     </div>
   </div>
@@ -13,13 +12,13 @@
 <script>
 
 import Carousel from "../components/Carousel"
-// import Marketing from "../components/Marketing"
 import Album from "../components/Album"
+// import { mapGetters } from "vuex"
 
 export default {
+
   components:{
     Carousel,
-    // Marketing,
     Album
   }
 }
