@@ -31,7 +31,7 @@ const routes = [
     component: Verification
   },
   {
-    path: '/search/:searchTerm?',
+    path: '/search/:searchTerm',
     name: 'SearchedComponents',
     component: SearchedComponents
   }

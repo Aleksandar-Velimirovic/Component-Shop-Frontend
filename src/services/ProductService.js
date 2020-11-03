@@ -1,5 +1,4 @@
 import { HttpService } from './HttpService'
-import store from '../store';
 
 export class ProductService extends HttpService {
     
@@ -23,19 +22,17 @@ export class ProductService extends HttpService {
         return this.axios.get(`/category/attributes/filters/${categoryId}`)
     }
 
-    searchProductsOfAnyCategory(searchTerm){
-        return this.axios.get(`/products/search/${searchTerm}`)
+    searchProductsOfAnyCategory(searchTerm, filters = []){
+        console.log(filters)
+        return this.axios.get(`/products/search/${searchTerm}`, {
+            params: {
+                filters: filters
+            }
+        })
     }
 
     getPopularProducts(){
         return this.axios.get('products/popular')
-    }
-
-    getGradebooksByUrl(){
-        if(store.getters.getNextPageUrl){
-            return this.axios.get(store.getters.getNextPageUrl)
-        }
-        console.log(store.getters.getNextPageUrl)
     }
 }                           
 

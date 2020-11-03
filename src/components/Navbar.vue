@@ -44,6 +44,7 @@ import Aside from "./Aside"
 import Login from "./Login"
 import Register from "./Register"
 import ProductCategoriesSidebar from "./ProductCategoriesSidebar"
+import { mapMutations, mapGetters, mapActions } from "vuex"
 
 export default {
 
@@ -54,21 +55,38 @@ export default {
     }
   },
 
-  methods:{
-    search(){
-      if(this.searchTerm !== ''){
-        this.$router.push({path: `/search/${this.searchTerm}`})
-      }else{
-        return this.searchErrorMessage = 'Please enter a search term to search products!'
-      }
-    },
-
-    removeSearchErrorMessage(){
-      if(this.searchErrorMessage){
-        this.searchErrorMessage = null
-      }
-    }
+  computed:{
+    ...mapGetters({
+      getSearchTerm: 'getSearchTerm'
+    })
   },
+
+  methods:{
+
+      ...mapMutations({
+        setSearchTerm: 'setSearchTerm'
+      }),
+
+      ...mapActions({
+          searchProducts: "searchProductsOfAnyCategory"
+        }),
+
+      search(){
+        if(this.searchTerm !== ''){
+          this.setSearchTerm(this.searchTerm)
+          this.searchProducts({searchTerm: this.getSearchTerm})
+          this.$router.push({name: 'SearchedComponents', params: {'searchTerm': this.searchTerm}})
+        }else{
+          return this.searchErrorMessage = 'Please enter a search term to search products!'
+        }
+      },
+
+      removeSearchErrorMessage(){
+        if(this.searchErrorMessage){
+          this.searchErrorMessage = null
+        }
+      },
+    },
 
   components:{
     Aside,

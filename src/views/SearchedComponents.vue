@@ -1,22 +1,26 @@
 <template>
     <b-row>
-        <b-col sm="2">
-          <b-form-group label="Categories:" style="border-bottom:1px solid gray;">
+        <b-col sm="2" style="height=100%;max-height:100%;background-color:#f8f9fa;margin-left:2px;">
+          <b-form-group label="Categories:">
+            <div style="border-bottom:1px solid gray;">
+
+            </div>
             <b-form-checkbox
               v-for="category in categories"
-              v-model="selected"
+              v-model="filters"
               :key="category.id"
               :value="category.id"
             >
               {{ category.product_category_name }}
             </b-form-checkbox>
+            <button class="btn btn-outline-success" style="font-size:15px;margin-top:1px;" @click="filterSearchedProducts()">Apply filters</button>
         </b-form-group>
         </b-col>
         <b-col sm="8">
           <div class="album py-5">
               <div class="container">
-                <div v-if="searchedProducts.length > 0" class="row">
-                  <div class="col-md-3" v-for="product in searchedProducts" :key="product.id">
+                <div v-if="products.length > 0" class="row">
+                  <div class="col-md-3" v-for="product in products" :key="product.id">
                     <div class="card mb-4" style="align-items:center;">
                       <img class="card-img-top" style="height: 225px; width: 70%; display: block;" :src="product.image.url" data-holder-rendered="true">
                       <div class="card-body">
@@ -27,7 +31,7 @@
                     </div>
                   </div>
                 </div>
-                <div v-else-if="searchedProducts.length == 0 && request == true">
+                <div v-else-if="products.length == 0 && mounted == true">
                     <div class="alert alert-danger" style="text-align:center">
                         <h3>
                             Component not found using search term {{ $route.params.searchTerm }}
@@ -41,19 +45,24 @@
 </template>
 
 <script>
-
-import { productsService } from "../services/ProductService";
 import StarRating from 'vue-star-rating'
+import { mapGetters, mapActions } from "vuex"
 
 export default {
 
     data(){
-        return{
-            searchedProducts: [],
-            categories: [],
-            count: 0,
-            request: false
-        }
+      return{
+        mounted: false,
+        filters: []
+      }
+    },
+
+    computed:{
+      ...mapGetters({
+        products: "getSearchedProducts",
+        categories: "getSearchedProductsCategories",
+        getSearchTerm: "getSearchTerm"
+      })
     },
 
     components:{
@@ -61,31 +70,21 @@ export default {
     },
 
     methods:{
-        removeDuplicates(originalArray, prop) {
-          var newArray = [];
-          var lookupObject  = {};
+      ...mapActions({
+        searchProducts: "searchProductsOfAnyCategory"
+      }),
 
-          for(var i in originalArray) {
-              lookupObject[originalArray[i][prop]] = originalArray[i];
-          }
 
-          for(i in lookupObject) {
-              newArray.push(lookupObject[i]);
-          }
-            return newArray;
-      }
+
+      filterSearchedProducts(){
+        this.searchProducts({searchTerm: localStorage.getItem('searchTerm'), filters: this.filters})
+      },
+
     },
-
     created(){
-        let array = []
-        productsService.searchProductsOfAnyCategory(this.$route.params.searchTerm).then(response => {
-            this.searchedProducts = response.data
-            response.data.forEach(component => {
-              array.push(component.category)
-            });
-            this.categories = this.removeDuplicates(array, 'product_category_name')
-            this.request = true
-        })
+      this.searchProducts({searchTerm: localStorage.getItem('searchTerm')}).then(() => {
+        this.mounted = true
+      })
     }
 }
 </script>
