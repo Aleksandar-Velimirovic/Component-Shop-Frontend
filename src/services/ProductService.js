@@ -2,7 +2,7 @@ import { HttpService } from './HttpService'
 
 export class ProductService extends HttpService {
     
-    getProductsByCategory(categoryId, filters = []){
+    getProductsByCategory(filters = [], categoryId){
         return this.axios.get(`/products/category/${categoryId}`, {
             params: {
                 filters: filters
@@ -33,6 +33,14 @@ export class ProductService extends HttpService {
 
     getPopularProducts(){
         return this.axios.get('products/popular')
+    }
+
+    getCategoryTitle(categoryId){
+        return this.axios.get(`/category/${categoryId}`)
+    }
+
+    getSingleProduct(productId){
+        return this.axios.get(`products/single/${productId}`)
     }
 }                           
 

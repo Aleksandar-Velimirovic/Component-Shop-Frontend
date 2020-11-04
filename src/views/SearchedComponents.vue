@@ -24,7 +24,7 @@
                     <div class="card mb-4" style="align-items:center;">
                       <img class="card-img-top" style="height: 225px; width: 70%; display: block;" :src="product.image.url" data-holder-rendered="true">
                       <div class="card-body">
-                        <h4 class="card-text" style="font-weight:100;"><a href="">{{ product.product_title }}</a></h4>
+                        <h4 class="card-text" style="font-weight:100;"><router-link :to="{name: 'SingleProduct', params:{id: product.id}}">{{ product.product_title }}</router-link></h4>
                         <star-rating v-model="product.rating" v-bind:star-size="20" v-bind:increment="0.5"/>
                         <span style="font-weight:700;font-size:28px;">1.199</span><span style="margin-left:2px;font-size:20px;font-weight:400;">RSD</span>
                       </div>

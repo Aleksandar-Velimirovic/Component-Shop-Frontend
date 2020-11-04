@@ -7,7 +7,8 @@ export const ProductStore = {
         filters: [],
         category_id:null,
         categories: [],
-        searchTerm: localStorage.getItem('searchTerm')
+        searchTerm: localStorage.getItem('searchTerm'),
+        categoryTitle: ''
     },
 
     mutations:{
@@ -55,14 +56,17 @@ export const ProductStore = {
             }
 
             state.categories = newArray
+        },
+
+        setCategoryTitle(state, title){
+            state.categoryTitle = title
         }
     },
 
     actions:{
 
         async getProductsByCategory(context, params){
-            let response = await productsService.getProductsByCategory(params.categoryId, params.filters)
-
+            let response = await productsService.getProductsByCategory(params.filters, params.categoryId)
             context.commit('setProducts', response.data)
 
         },
@@ -79,7 +83,13 @@ export const ProductStore = {
             context.commit('setSearchedProductsCategories', response.data.map(component => {
                 return component.category
             }))
-        }
+        },
+
+        async getCategory(context, categoryId){
+            let response = await productsService.getCategoryTitle(categoryId)
+            context.commit('setCategoryTitle', response.data)
+        },
+
     },
 
     getters:{
@@ -106,6 +116,10 @@ export const ProductStore = {
 
         getCategoryId(state){
             return state.category_id
+        },
+
+        getCategoryTitle(state){
+            return state.categoryTitle
         }
     }
 }

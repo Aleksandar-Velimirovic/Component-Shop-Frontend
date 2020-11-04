@@ -20,7 +20,7 @@
                   <b-button class="nav-link" v-b-modal.modal-register v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Register</b></b-button>
                 </a>
              </li>
-             <b-button v-b-toggle.sidebar-categories style="border-radius:0px;box-shadow:none;font-family:Roboto;background-color:#ff9999;color:#000000;border:none;font-weight:bold;">Components <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15211315791553239378-512.png" style="height:30px;width:30px;" alt=""></b-button>
+             <button class="btn btn-outline-success" style="box-shadow:none;font-family:Roboto;" v-b-toggle.sidebar-categories>Components <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15211315791553239378-512.png" style="height:30px;width:30px;" alt=""></button>
             </ul>
             <div class="form-inline my-2 my-lg-0">
               <small v-if="searchErrorMessage" style="color:red;margin-right:3px;">{{searchErrorMessage}}</small>
