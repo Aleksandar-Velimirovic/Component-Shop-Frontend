@@ -31,14 +31,13 @@
           <button @click="login()" class="btn btn-primary">Submit</button>
         </div>
       </div>
-      {{ errors }}
     </b-modal>
 </template>
 
 <script>
 
 import { authService } from "../services/AuthService"
-// import { mapGetters, mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
   export default {
     data() {
@@ -50,16 +49,21 @@ import { authService } from "../services/AuthService"
 
     methods: {
 
+      ...mapMutations({
+        setToken: 'setToken'
+      }),
+
       login(){
         authService.login(this.user).then(response => {
           this.$nextTick(() => {
-            this.$bvModal.hide('"modal-prevent-closing')
+            this.$bvModal.hide('modal-prevent-closing')
             this.user = {}
           })
           authService.setHeaders({
             Authorization: `Bearer: ${response.data.token}`
           })
           localStorage.setItem('token', response.data.token)
+          this.setToken(response.data.token)
         }).catch(error => {
           this.errors = error.response.data.errors
         })

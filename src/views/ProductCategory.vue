@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-3" v-for="product in products" :key="product.id">
                             <div class="card mb-4" style="align-items:center;">
-                                <img class="card-img-top" style="height: 225px; width: 70%; display: block;" :src="product.image.url" data-holder-rendered="true">
+                                <img class="card-img-top" style="height: 225px; width: 70%; display: block;" :src="product.image" data-holder-rendered="true">
                                 <div class="card-body">
                                     <h4 class="card-text" style="font-weight:100;"><router-link :to="{name: 'SingleProduct', params:{id: product.id}}">{{ product.product_title }}</router-link></h4>
                                     <star-rating v-model="product.rating" read-only v-bind:star-size="20" v-bind:increment="0.5"/>

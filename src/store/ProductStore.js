@@ -8,7 +8,9 @@ export const ProductStore = {
         category_id:null,
         categories: [],
         searchTerm: localStorage.getItem('searchTerm'),
-        categoryTitle: ''
+        categoryTitle: '',
+        cartItems: JSON.parse(localStorage.getItem("products")) ?? [],
+        numberOfItemsInCart: localStorage.getItem('numberOfItemsInCart')
     },
 
     mutations:{
@@ -60,6 +62,25 @@ export const ProductStore = {
 
         setCategoryTitle(state, title){
             state.categoryTitle = title
+        },
+
+        setCartItems(state, item){
+            state.cartItems.push(item)
+            localStorage.setItem('products', JSON.stringify(state.cartItems))
+            state.numberOfItemsInCart = state.cartItems.length
+            localStorage.setItem('numberOfItemsInCart', state.cartItems.length)
+        },
+
+        removeItemFromCart(state,item){
+            const index = state.cartItems.indexOf(item)
+
+            state.cartItems.splice(index, 1)
+
+            localStorage.setItem('products', JSON.stringify(state.cartItems))
+
+            state.numberOfItemsInCart = state.cartItems.length
+            
+            localStorage.setItem('numberOfItemsInCart', state.cartItems.length)
         }
     },
 
@@ -120,6 +141,14 @@ export const ProductStore = {
 
         getCategoryTitle(state){
             return state.categoryTitle
+        },
+
+        getCartItems(state){
+            return state.cartItems
+        },
+
+        getNumberOfItemsInCart(state){
+            return state.numberOfItemsInCart
         }
     }
 }

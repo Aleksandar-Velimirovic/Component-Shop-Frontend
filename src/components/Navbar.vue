@@ -7,17 +7,22 @@
           </div>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-             <li class="nav-item active">
-                <img src="../images/kisspng-amazon-com-shopping-cart-computer-icons-e-commerce-shopping-cart-5ab5c0a29c8a14.1766476815218607706412.png" style="height:45px;width:50px; padding:0;" alt="">
+             <li class="nav-item active" style="padding-top:10px;" @click="$router.push({name: 'Cart'})">
+                <img src="../images/shopping-cart-svg-png-icon-download-28.png" style="height:30px;width:40px;padding:0;cursor:pointer;" alt=""><b-badge v-if="getNumberOfItemsInCart > 0" pill variant="danger" style="margin-bottom:10px;">{{ getNumberOfItemsInCart }}</b-badge>
              </li>
-             <li class="nav-item active">
+             <li v-if="!isUserLoggedIn" class="nav-item active">
                 <a href="#" class="nav-link" style="font-family:Roboto;padding-top:11px;">
                   <b-button class="nav-link" v-b-modal.modal-prevent-closing v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Login</b></b-button>
                 </a>
              </li>
-             <li class="nav-item active">
+             <li v-if="!isUserLoggedIn" class="nav-item active">
                 <a href="#" class="nav-link" style="font-family:Roboto;padding-top:11px;">
                   <b-button class="nav-link" v-b-modal.modal-register v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Register</b></b-button>
+                </a>
+             </li>
+              <li v-if="isUserLoggedIn" class="nav-item active">
+                <a href="#" class="nav-link" style="font-family:Roboto;padding-top:11px;">
+                  <b-button class="nav-link" @click="logoutUser()" v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Logout</b></b-button>
                 </a>
              </li>
              <button class="btn btn-outline-success" style="box-shadow:none;font-family:Roboto;" v-b-toggle.sidebar-categories>Components <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15211315791553239378-512.png" style="height:30px;width:30px;" alt=""></button>
@@ -28,7 +33,6 @@
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search()">Search</button>
             </div>
           </div>
-          <!-- #f8f9fa -->
         </nav>
           <Aside id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow/>
           <Login/>
@@ -57,7 +61,9 @@ export default {
 
   computed:{
     ...mapGetters({
-      getSearchTerm: 'getSearchTerm'
+      getSearchTerm: 'getSearchTerm',
+      isUserLoggedIn: 'isUserLoggedIn',
+      getNumberOfItemsInCart: 'getNumberOfItemsInCart'
     })
   },
 
@@ -68,7 +74,8 @@ export default {
       }),
 
       ...mapActions({
-          searchProducts: "searchProductsOfAnyCategory"
+          searchProducts: "searchProductsOfAnyCategory",
+          logout: "logout"
         }),
 
       search(){
@@ -79,6 +86,14 @@ export default {
         }else{
           return this.searchErrorMessage = 'Please enter a search term to search products!'
         }
+      },
+
+      logoutUser(){
+        this.logout().then(() => {
+          if(this.$route.name !== 'Home'){
+            this.$router.push({name: 'Home'})
+          }
+        })
       },
 
       removeSearchErrorMessage(){
@@ -98,6 +113,7 @@ export default {
 </script>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
 </style>

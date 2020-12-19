@@ -7,6 +7,7 @@ import Verification from '../views/Verification.vue'
 import SearchedComponents from '../views/SearchedComponents.vue'
 import ProductCategory from '../views/ProductCategory.vue'
 import SingleProduct from '../views/SingleProduct.vue'
+import Cart from '../views/Cart.vue'
 
 Vue.use(VueRouter)
 
@@ -46,7 +47,12 @@ const routes = [
     path: '/products/single/:id',
     name: 'SingleProduct',
     component: SingleProduct
-  }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
+  },
 ]
 
 const router = new VueRouter({

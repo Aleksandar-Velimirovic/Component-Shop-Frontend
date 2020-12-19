@@ -32,7 +32,6 @@ export const AuthStore = {
                     Authorization: `Bearer: ${response.data.token}`
                 })
                 localStorage.setItem('token', response.data.token)
-                // localStorage.setItem('user_id', response.data.user_id)
                 context.commit('setErrors', null)
                 context.commit('setToken', response.data.token)
             }catch(exception){
@@ -42,6 +41,7 @@ export const AuthStore = {
 
         async logout(context){
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
             context.commit('setToken', null)
         }
     },
