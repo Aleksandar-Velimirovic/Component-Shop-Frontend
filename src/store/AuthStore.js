@@ -58,6 +58,10 @@ export const AuthStore = {
 
         getmailVerificationMessage(state){
             return state.mailVerificationMessage
-        }
+        },
+
+        getToken(state){
+            return state.token
+         },
     }
 }

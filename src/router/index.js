@@ -8,6 +8,8 @@ import SearchedComponents from '../views/SearchedComponents.vue'
 import ProductCategory from '../views/ProductCategory.vue'
 import SingleProduct from '../views/SingleProduct.vue'
 import Cart from '../views/Cart.vue'
+import test from '../views/test.vue'
+
 
 Vue.use(VueRouter)
 
@@ -52,6 +54,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   },
 ]
 

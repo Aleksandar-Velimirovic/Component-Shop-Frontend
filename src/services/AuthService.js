@@ -13,6 +13,10 @@ export class AuthService extends HttpService {
     verifyUser(token){
         return this.axios.get(`verification/${token}`)
     }
+
+    test(){
+        return this.axios.get('test')
+    }
 }                           
 
 export const authService = new AuthService()

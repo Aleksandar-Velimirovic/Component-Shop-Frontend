@@ -5,12 +5,9 @@ const BASE_URL = 'http://localhost:8000/api/'
 export class HttpService{
     constructor(){
         axios.defaults.baseURL = BASE_URL
-        axios.defaults.headers.accept = 'application/json'
+        axios.defaults.headers.common.Accept = 'application/json'
+        axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`
         this.axios = axios
-    }
-
-    setHeaders(headers) {
-        Object.assign(axios.defaults.headers.common, headers)
     }
 
     parseUrl(url){
@@ -18,5 +15,9 @@ export class HttpService{
             return url.substr(BASE_URL.length)
         }
         return url
+    }
+
+    setHeaders() {
+     console.log(axios.defaults.headers)   
     }
 }

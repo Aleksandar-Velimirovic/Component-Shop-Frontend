@@ -14,6 +14,7 @@
               </div>
             </div>
           </div>
+          <button @click="test()">test</button>
         </div>
       </div>
 </template>
@@ -23,6 +24,7 @@
 import StarRating from 'vue-star-rating'
 import { productsService} from '../services/ProductService'
 import { mapGetters } from "vuex"
+import { authService } from "../services/AuthService"
 
 export default {
     data(){
@@ -39,6 +41,12 @@ export default {
       ...mapGetters({
         searchedProducts: 'getSearchedProducts'
       })
+    },
+
+    methods:{
+      test(){
+        authService.test()
+      }
     },
 
     created(){

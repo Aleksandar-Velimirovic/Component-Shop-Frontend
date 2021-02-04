@@ -59,10 +59,9 @@ import { mapMutations } from 'vuex'
             this.$bvModal.hide('modal-prevent-closing')
             this.user = {}
           })
-          authService.setHeaders({
-            Authorization: `Bearer: ${response.data.token}`
-          })
+          authService.setHeaders(response.data.token)
           localStorage.setItem('token', response.data.token)
+          localStorage.setItem('userId', response.data.userId)
           this.setToken(response.data.token)
         }).catch(error => {
           this.errors = error.response.data.errors

@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="/"><b style="font-family:Roboto">Online Component Shop</b></a>
+          <a class="navbar-brand" style="width:300px;" href="/"><b style="font-family:Roboto;width:200px;">Online Component Shop</b></a>
           <div class="mb-3" v-if="$mq === 'md' || $mq === 'sm'">
             <b-button class="navbar-toggler" v-b-toggle href="#sidebar-no-header" @click.prevent><span class="navbar-toggler-icon"></span></b-button>
           </div>
