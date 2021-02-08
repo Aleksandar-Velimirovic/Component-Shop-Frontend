@@ -33,6 +33,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- v-bind:userHasOrdered="userHasOrdered" -->
                 <ProductInCart v-bind:product="product" style="max-height:50%;height:50%;"/>
                 <Comments v-bind:product="product"/>
             </b-col>
@@ -104,8 +105,8 @@ export default {
                     progressPadding: 0,
                     type: 'line'
                 }
-            }
-            // userHasOrdered: null,
+            },
+            userHasOrdered: null,
             // comment: {
             //     user_id: localStorage.getItem('userId'),
             //     product_id: this.$route.params.id
@@ -129,18 +130,15 @@ export default {
             this.setCartItems(this.product)
             this.inCart = true
             this.$bvModal.show('modal-cart')
-        },
-
-        // addComment(){
-        //     commentService.addComment(this.comment)
-        // }
+        }
     },
 
     created(){
         productsService.getSingleProduct(this.$route.params.id).then(response => {
             this.product = response.data.product
             this.productAttribueValues = response.data.productAttribueValues
-            this.userHasOrdered = response.data.userHasOrdered
+            localStorage.setItem('userHasOrdered', response.data.userHasOrdered)
+            // this.userHasOrdered = response.data.userHasOrdered
         })
     }
 }

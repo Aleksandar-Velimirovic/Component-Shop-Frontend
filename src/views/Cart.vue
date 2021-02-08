@@ -25,6 +25,8 @@
                         </div>
                     </div>
                 </div>
+                <OrderModal/>
+                <Login/>
             </b-col>
             <b-col sm="3">
                 <div>
@@ -35,7 +37,8 @@
                                     <div class="card-body">
                                     <span style="font-size:25px;margin-right:5px;">Total Price:</span><span style="font-weight:700;font-size:25px;color:red;">{{totalPrice}}</span><span style="margin-left:2px;font-size:15px;font-weight:400;">RSD</span>
                                     </div>
-                                    <button v-if="totalPrice > 0" class="btn btn-outline-success" style="margin-bottom:10px;font-size:25px;">Continue To Order</button>
+                                    <button v-if="totalPrice > 0 && isUserLoggedIn" class="btn btn-outline-success" v-b-modal.order-modal style="margin-bottom:10px;font-size:25px;">Continue To Order</button>
+                                    <button v-if="totalPrice > 0 && !isUserLoggedIn" class="btn btn-outline-success" v-b-modal.modal-prevent-closing style="margin-bottom:10px;font-size:25px;">Continue To Order</button>
                                 </div>
                             </div>
                         </div>
@@ -49,6 +52,8 @@
 <script>
 
 import { mapGetters, mapMutations } from "vuex"
+import OrderModal from "../components/OrderModal"
+import Login from "../components/Login"
 
 export default {
     data(){
@@ -61,8 +66,14 @@ export default {
 
     computed:{
         ...mapGetters({
-            getCartItems: 'getCartItems'
+            getCartItems: 'getCartItems',
+            isUserLoggedIn: 'isUserLoggedIn'
         })
+    },
+
+    components:{
+        OrderModal,
+        Login
     },
 
     methods:{

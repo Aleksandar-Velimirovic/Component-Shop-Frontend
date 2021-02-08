@@ -90,6 +90,7 @@ export default {
 
       logoutUser(){
         this.logout().then(() => {
+          localStorage.setItem('userHasOrdered', false)
           if(this.$route.name !== 'Home'){
             this.$router.push({name: 'Home'})
           }

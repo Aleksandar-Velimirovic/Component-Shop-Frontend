@@ -7,6 +7,7 @@ export class HttpService{
         axios.defaults.baseURL = BASE_URL
         axios.defaults.headers.common.Accept = 'application/json'
         axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`
+        axios.defaults.headers.common.AccessControlAllowOrigin = '*'
         this.axios = axios
     }
 
