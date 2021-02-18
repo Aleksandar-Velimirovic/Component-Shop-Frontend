@@ -1,7 +1,7 @@
 <template>
     <div class="single">
         <b-row>
-            <b-col sm="4" style="max-height:100vh;height:100vh;background-color:#f8f9fa;">
+            <b-col sm="4" style="max-height:100%;height:100%;background-color:#f8f9fa;">
                 <h4 style="font-family:Roboto;">
                     Specifications
                 </h4>
@@ -33,34 +33,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- v-bind:userHasOrdered="userHasOrdered" -->
                 <ProductInCart v-bind:product="product" style="max-height:50%;height:50%;"/>
                 <Comments v-bind:product="product"/>
+                <AddComment v-if="getHasUserOrdered" v-bind:product="product"/>
             </b-col>
-            <!-- <b-col sm="3"> -->
-                <!-- <div class="album py-5" style="height:100vh;">
-                    <div class="container" style="font-family:Roboto;">
-                        <h4 class="text-center" style="font-size:24px;font-family:Roboto;"><b>Comments</b></h4>
-                        <div class="row" style="align-items:center;text-align:center;diplay:flex;justify-content:center;">
-                            <div class="card mb-4" style="align-items:center;">
-                                <div class="card-body"> -->
-                                    <!-- <div v-if="userHasOrdered">
-                                        <b-form-textarea
-                                            id="textarea"
-                                            placeholder="Enter comment... 100 letters limit"
-                                            rows="1"
-                                            max-rows="3"
-                                            maxlength="100"
-                                            v-model="comment.content"
-                                            ></b-form-textarea>
-                                            <button class="btn btn-outline-success" style="margin-top:10px;" @click="addComment()">Add Comment</button>
-                                    </div> -->
-                                <!-- </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->                   
-            <!-- </b-col> -->
         </b-row>
     </div>
 </template>
@@ -68,62 +44,39 @@
 <script>
 import { productsService } from '../services/ProductService'
 import StarRating from 'vue-star-rating'
-import { mapMutations } from "vuex"
+import { mapMutations, mapGetters } from "vuex"
 import ProductInCart from "../components/ProductInCart"
 // import { commentService } from '../services/CommentService'
 import Comments from "../components/Comments"
+import AddComment from "../components/AddComment"
 
 
 export default {
     data(){
         return{
             product: {},
-            productAttribueValues: {},
-            inCart: false,
-            value: 50,
-            options: {
-                text: {
-                    color: '#FFFFFF',
-                    shadowEnable: true,
-                    shadowColor: '#000000',
-                    fontSize: 14,
-                    fontFamily: 'Helvetica',
-                    dynamicPosition: false,
-                    hideText: true
-                },
-                progress: {
-                    color: '#f9ce09',
-                    backgroundColor: '#bfbfbf'
-                },
-                layout: {
-                    height: 15,
-                    width: 140,
-                    verticalTextAlign: 61,
-                    horizontalTextAlign: 43,
-                    zeroOffset: 0,
-                    strokeWidth: 30,
-                    progressPadding: 0,
-                    type: 'line'
-                }
-            },
-            userHasOrdered: null,
-            // comment: {
-            //     user_id: localStorage.getItem('userId'),
-            //     product_id: this.$route.params.id
-            // }
+            productAttribueValues: {}
         }
+    },
+
+    computed:{
+        ...mapGetters({
+            getHasUserOrdered: 'getHasUserOrdered'
+        })
     },
 
     components:{
         StarRating,
         ProductInCart,
-        Comments
+        Comments,
+        AddComment
     },
 
 
     methods:{
         ...mapMutations({
-            setCartItems: 'setCartItems'
+            setCartItems: 'setCartItems',
+            setHasUserOrdered: 'setHasUserOrdered'
         }),
 
         addToCart(){
@@ -137,8 +90,8 @@ export default {
         productsService.getSingleProduct(this.$route.params.id).then(response => {
             this.product = response.data.product
             this.productAttribueValues = response.data.productAttribueValues
-            localStorage.setItem('userHasOrdered', response.data.userHasOrdered)
-            // this.userHasOrdered = response.data.userHasOrdered
+            this.setHasUserOrdered(response.data.userHasOrdered)
+            console.log(this.getHasUserOrdered)
         })
     }
 }

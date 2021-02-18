@@ -10,15 +10,4 @@ export class HttpService{
         axios.defaults.headers.common.AccessControlAllowOrigin = '*'
         this.axios = axios
     }
-
-    parseUrl(url){
-        if(typeof url === 'string' && url.includes(BASE_URL)){
-            return url.substr(BASE_URL.length)
-        }
-        return url
-    }
-
-    setHeaders() {
-     console.log(axios.defaults.headers)   
-    }
 }

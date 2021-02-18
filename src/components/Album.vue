@@ -24,7 +24,7 @@
 import StarRating from 'vue-star-rating'
 import { productsService} from '../services/ProductService'
 import { mapGetters } from "vuex"
-import { authService } from "../services/AuthService"
+// import { authService } from "../services/AuthService"
 
 export default {
     data(){
@@ -45,7 +45,7 @@ export default {
 
     methods:{
       test(){
-        authService.test()
+        location.reload();
       }
     },
 

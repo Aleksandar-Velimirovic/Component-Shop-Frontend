@@ -41,7 +41,6 @@
 
 import { authService } from "../services/AuthService"
 import { mapMutations, mapGetters } from 'vuex'
-// import OrderModal from "./OrderModal"
 
   export default {
     data() {
@@ -58,10 +57,6 @@ import { mapMutations, mapGetters } from 'vuex'
         })
     },
 
-    components:{
-        // OrderModal
-    },
-
     methods: {
 
       ...mapMutations({
@@ -74,11 +69,12 @@ import { mapMutations, mapGetters } from 'vuex'
             if(this.$route.name=="Cart"){
               this.$bvModal.show('order-modal')
               this.$bvModal.hide('modal-prevent-closing')
+            }else{
+              location.reload();
+              this.$bvModal.hide('modal-prevent-closing')
             }
-            this.$bvModal.hide('modal-prevent-closing')
             this.user = {}
           })
-          authService.setHeaders(response.data.token)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('userId', response.data.userId)
           this.setToken(response.data.token)

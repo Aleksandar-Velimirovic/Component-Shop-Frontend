@@ -9,7 +9,7 @@ import ProductCategory from '../views/ProductCategory.vue'
 import SingleProduct from '../views/SingleProduct.vue'
 import Cart from '../views/Cart.vue'
 import test from '../views/test.vue'
-
+import AddCommentAndRating from '../views/AddCommentAndRating.vue'
 
 Vue.use(VueRouter)
 
@@ -59,6 +59,11 @@ const routes = [
     path: '/test',
     name: 'test',
     component: test
+  },
+  {
+    path: '/addCommentAndRating/:id',
+    name: 'AddCommentAndRating',
+    component: AddCommentAndRating
   },
 ]
 

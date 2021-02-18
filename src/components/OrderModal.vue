@@ -46,7 +46,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { orderService } from "../services/OrderService"
 
 export default {
@@ -70,10 +70,16 @@ export default {
     methods: {
 
         addOrder(){
-            orderService.addOrder(this.order).then(response => {
-                console.log(response)
+            orderService.addOrder(this.order).then(() => {
+                this.$router.push({name: 'Home'})
+                this.setCartItems(null)
+                this.totalPrice = 0
             })
         },
+
+        ...mapMutations({
+            setCartItems: 'setCartItems'
+        }),
 
         removeErrorFirstName(){
             if(this.errors.first_name){

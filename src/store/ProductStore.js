@@ -10,7 +10,8 @@ export const ProductStore = {
         searchTerm: localStorage.getItem('searchTerm'),
         categoryTitle: '',
         cartItems: JSON.parse(localStorage.getItem("products")) ?? [],
-        numberOfItemsInCart: localStorage.getItem('numberOfItemsInCart')
+        numberOfItemsInCart: localStorage.getItem('numberOfItemsInCart'),
+        hasUserOrdered: localStorage.getItem('hasUserOrdered')
     },
 
     mutations:{
@@ -65,10 +66,17 @@ export const ProductStore = {
         },
 
         setCartItems(state, item){
-            state.cartItems.push(item)
-            localStorage.setItem('products', JSON.stringify(state.cartItems))
-            state.numberOfItemsInCart = state.cartItems.length
-            localStorage.setItem('numberOfItemsInCart', state.cartItems.length)
+            if(item == null){
+                state.cartItems = []
+                state.numberOfItemsInCart = 0
+                localStorage.removeItem('products')
+                localStorage.removeItem('numberOfItemsInCart')
+            }else{
+                state.cartItems.push(item)
+                localStorage.setItem('products', JSON.stringify(state.cartItems))
+                state.numberOfItemsInCart = state.cartItems.length
+                localStorage.setItem('numberOfItemsInCart', state.cartItems.length)
+            }
         },
 
         removeItemFromCart(state,item){
@@ -81,6 +89,11 @@ export const ProductStore = {
             state.numberOfItemsInCart = state.cartItems.length
             
             localStorage.setItem('numberOfItemsInCart', state.cartItems.length)
+        },
+
+        setHasUserOrdered(state, bool){
+            state.hasUserOrdered = bool
+            localStorage.setItem('hasUserOrdered', state.hasUserOrdered)
         }
     },
 
@@ -149,6 +162,10 @@ export const ProductStore = {
 
         getNumberOfItemsInCart(state){
             return state.numberOfItemsInCart
+        },
+
+        getHasUserOrdered(state){
+            return state.hasUserOrdered
         }
     }
 }
