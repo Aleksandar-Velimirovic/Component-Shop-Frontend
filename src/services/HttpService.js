@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8000/api/'
+const BASE_URL = 'https://floating-hollows-40923.herokuapp.com/api/'
 
 export class HttpService{
     constructor(){

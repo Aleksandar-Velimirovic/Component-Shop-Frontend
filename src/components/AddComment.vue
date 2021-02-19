@@ -30,7 +30,7 @@ export default {
 
     methods:{
         addCommentAndRating(){
-            commentService.addComment({user_id: localStorage.getItem('userId'), product_id: 2, rating: this.rating, content: this.content}).then(() => {
+            commentService.addComment({user_id: localStorage.getItem('userId'), product_id: this.product.id, rating: this.rating, content: this.content}).then(() => {
             location.reload();
             })
         }

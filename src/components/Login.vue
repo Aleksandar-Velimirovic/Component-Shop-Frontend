@@ -33,7 +33,6 @@
           </div>
         </div>
       </b-modal>
-      <!-- <OrderModal/> -->
   </div>
 </template>
 

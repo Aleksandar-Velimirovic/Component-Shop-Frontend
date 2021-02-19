@@ -24,8 +24,8 @@
             </div>
             <div class="form-group">
                 <label>Address</label>
-                <input class="form-control" type="text" v-model="order.address" @click="removeErrorAddress()">
-                <small v-if="errors.email" style="color:red;">{{errors.address[0]}}</small>
+                <input class="form-control" type="text" v-model="order.order_address" @click="removeErrorAddress()">
+                <small v-if="errors.email" style="color:red;">{{errors.order_address[0]}}</small>
             </div>
             <div class="form-group">
                 <label>Apartment number</label>
@@ -34,8 +34,8 @@
             </div>
             <div class="form-group">
                 <label>Phone Number</label>
-                <input class="form-control" type="text" v-model="order.number" @click="removeErrorPhoneNumber()">
-                <small v-if="errors.repeat_password" style="color:red;">{{errors.number[0]}}</small>
+                <input class="form-control" type="text" v-model="order.phone_number" @click="removeErrorPhoneNumber()">
+                <small v-if="errors.repeat_password" style="color:red;">{{errors.phone_number[0]}}</small>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" @click="addOrder()">Submit</button>
@@ -66,7 +66,6 @@ export default {
         })
     },
 
-
     methods: {
 
         addOrder(){
@@ -74,6 +73,8 @@ export default {
                 this.$router.push({name: 'Home'})
                 this.setCartItems(null)
                 this.totalPrice = 0
+            }).catch(error => {
+                this.errors = error.response.data.errors
             })
         },
 

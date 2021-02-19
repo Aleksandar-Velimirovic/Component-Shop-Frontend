@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Marketing from '../components/Marketing.vue'
 import Carousel from '../components/Carousel.vue'
 import Verification from '../views/Verification.vue'
 import SearchedComponents from '../views/SearchedComponents.vue'
 import ProductCategory from '../views/ProductCategory.vue'
 import SingleProduct from '../views/SingleProduct.vue'
 import Cart from '../views/Cart.vue'
-import test from '../views/test.vue'
-import AddCommentAndRating from '../views/AddCommentAndRating.vue'
 
 Vue.use(VueRouter)
 
@@ -19,11 +16,7 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/marketing',
-    name: 'Marketing',
-    component: Marketing
-  },
+
   {
     path: '/carousel',
     name: 'Carousel',
@@ -54,17 +47,7 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
-  },
-  {
-    path: '/test',
-    name: 'test',
-    component: test
-  },
-  {
-    path: '/addCommentAndRating/:id',
-    name: 'AddCommentAndRating',
-    component: AddCommentAndRating
-  },
+  }
 ]
 
 const router = new VueRouter({
