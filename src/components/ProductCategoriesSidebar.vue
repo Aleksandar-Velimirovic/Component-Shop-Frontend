@@ -4,7 +4,7 @@
         <div class="p-3" style="text-align:center;align-items:center;">
           <h4 id="sidebar-no-header-title" style="font-family:Roboto;"><b>Choose product category</b></h4>
           <div v-for="category in categories" :key="category.id" class="list-group">
-            <div class="list-group-item" @click="productCategory(category.id)" style="border-radius:8px;font-family:Roboto;font-weight:bold;cursor:pointer;">
+            <div class="list-group-item" @click="productCategory(category.id)" style="border-radius:0px;font-family:Roboto;font-weight:bold;cursor:pointer;">
               {{ category.product_category_name }}
             </div>
           </div>
