@@ -10,7 +10,7 @@
         <div class="form-group">
           <label>Name</label>
           <input class="form-control" type="text" v-model="user.name" @click="removeErrorName()">
-          <small v-if="errors.first_name" style="color:red;">{{errors.first_name[0]}}</small>
+          <small v-if="errors.name" style="color:red;">{{errors.name[0]}}</small>
         </div>
         <div class="form-group">
           <label>Email</label>
