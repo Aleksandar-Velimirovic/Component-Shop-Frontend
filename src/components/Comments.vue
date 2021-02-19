@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .list-group-item{
     border-bottom: thin solid !important;
