@@ -17,12 +17,12 @@
              </li>
              <li v-if="!isUserLoggedIn" class="nav-item active">
                 <a href="#" class="nav-link" style="font-family:Roboto;padding-top:11px;">
-                  <b-button class="nav-link" v-b-modal.modal-register v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Register</b></b-button>
+                  <b-button class="nav-link" v-b-modal.modal-register v-b-tooltip.hover title="Register here!" style=" background:none!important;border:none;padding:0!important;"><b>Register</b></b-button>
                 </a>
              </li>
               <li v-if="isUserLoggedIn" class="nav-item active">
                 <a href="#" class="nav-link" style="font-family:Roboto;padding-top:11px;">
-                  <b-button class="nav-link" @click="logoutUser()" v-b-tooltip.hover title="Login to buy products!" style=" background:none!important;border:none;padding:0!important;"><b>Logout</b></b-button>
+                  <b-button class="nav-link" @click="logoutUser()" v-b-tooltip.hover title="Logout" style=" background:none!important;border:none;padding:0!important;"><b>Logout</b></b-button>
                 </a>
              </li>
              <button class="btn btn-outline-success" style="box-shadow:none;font-family:Roboto;" v-b-toggle.sidebar-categories>Components <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15211315791553239378-512.png" style="height:30px;width:30px;" alt=""></button>

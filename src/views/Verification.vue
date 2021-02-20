@@ -21,9 +21,6 @@ export default {
         authService.verifyUser(this.$route.params.token).then(response => {
             this.setErrorMessage(response.data.message.mail[0])
             this.$router.push({name: 'Home'})
-        }).catch(error => {
-            this.setErrorMessage(error.response.data.error.token[0])
-            this.$router.push({name: 'Home'})
         })
     }
 }

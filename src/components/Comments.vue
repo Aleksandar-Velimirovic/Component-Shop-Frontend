@@ -2,6 +2,7 @@
     <div>
         <div class="album py-5" style="margin-top:150px;">
             <h4 v-if="product.comments.length > 0" class="text-center" style="font-size:24px;font-family:Roboto;"><b>Comments</b></h4>
+            <span style="color:red;">*You can only rate and comment if you have ordered this product!</span>
              <div v-for="comment in product.comments" :key="comment.id" class="list-group list-group-flush">
                 <div class="list-group-item">
                     <div style="width:20%;">
